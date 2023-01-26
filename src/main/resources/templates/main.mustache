@@ -8,6 +8,12 @@
             </form>
         </div>
         <div>Messages</div>
+        <div>
+            <form action="/filter" method="post">
+                <input type="text" name="filter">
+                <button type="submit">Find</button>
+            </form>
+        </div>
         {{#messages}}
             <div>
                 <b>{{id}}</b>
