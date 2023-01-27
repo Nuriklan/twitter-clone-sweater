@@ -5,7 +5,8 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "messages")
 public class Message {
-    public Message(String text, String tag) {
+    public Message(String text, String tag, User user) {
+        this.author = user;
         this.text = text;
         this.tag = tag;
     }
@@ -21,9 +22,13 @@ public class Message {
 
     private String tag;
 
-    @ManyToOne
-    @JoinColumn(name = "author_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     private User author;
+
+    public String getAuthorName() {
+        return author != null ? author.getUsername() : "<none>";
+    }
 
     public User getAuthor() {
         return author;

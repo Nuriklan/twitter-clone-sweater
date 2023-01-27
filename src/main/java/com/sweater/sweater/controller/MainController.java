@@ -5,7 +5,6 @@ import com.sweater.sweater.entity.User;
 import com.sweater.sweater.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,7 +39,7 @@ public class MainController {
             @RequestParam String tag,
             Map<String, Object> model) {
 
-        Message message = new Message(text, tag);
+        Message message = new Message(text, tag, user);
 
         messageRepository.save(message);
         Iterable<Message> messages = messageRepository.findAll();
@@ -54,7 +53,7 @@ public class MainController {
             @RequestParam String filter,
             Map<String, Object> model
     ) {
-        System.out.println("POST FILTER");
+
         Iterable<Message> messages;
 
         if (filter != null && !filter.isEmpty()) {

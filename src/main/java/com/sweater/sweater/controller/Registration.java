@@ -43,7 +43,6 @@ public class Registration {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
-        System.out.println(user.getId() + " " + user.getUsername());
 
         return "redirect:/login";
     }
