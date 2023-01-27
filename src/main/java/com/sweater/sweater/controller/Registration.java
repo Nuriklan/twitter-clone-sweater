@@ -29,7 +29,7 @@ public class Registration {
     public String addUser(
             User user,
             Map<String, Object> model) {
-        System.out.println("POST REGISTRATION");
+
         User userFromDB = userRepository.findByUsername(user.getUsername());
 
         if (userFromDB != null) {
