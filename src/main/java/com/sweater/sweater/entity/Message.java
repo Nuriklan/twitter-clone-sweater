@@ -21,6 +21,18 @@ public class Message {
 
     private String tag;
 
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private User author;
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
     public Integer getId() {
         return id;
     }
