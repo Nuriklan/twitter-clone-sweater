@@ -14,8 +14,8 @@
 </div>
 <div>Messages</div>
 <div>
-    <form action="/filter" method="post">
-        <input type="text" name="filter">
+    <form action="/main" method="get">
+        <input type="text" name="filter" value="${filter}">
         <button type="submit">Find</button>
     </form>
 </div>
