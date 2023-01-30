@@ -22,6 +22,10 @@ public class User implements UserDetails {
 
     private boolean enabled;
 
+    public boolean isAdmin() {
+        return roles.contains(Role.ADMIN);
+    }
+
     public Set<Role> getRoles() {
         return roles;
     }

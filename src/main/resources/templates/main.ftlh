@@ -1,39 +1,56 @@
 <#import "parts/common.ftlh" as c>
-<#import "parts/login.ftlh" as l>
 
 <@c.page>
-<div>
-    <@l.logout />
-    <span><a href="/user">User list</a></span>
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <form action="/main" method="get" class="form-inline">
+            <input type="text" name="filter" value="${filter?ifExists}" class="form-control" placeholder="Search by tag">
+            <button type="submit" class="btn btn-primary ml-2">Search</button>
+        </form>
+    </div>
 </div>
-<div>
-    <form action="/main" method="post" enctype="multipart/form-data">>
-        <input type="text" name="text" placeholder="Type your message">
-        <input type="text" name="tag" placeholder="Tag">
-        <input type="file" name="file">
-        <button type="submit">Add</button>
-    </form>
+<a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Add new message
+</a>
+<div class="collapse" id="collapseExample" data-bs-target="#collapseExample">
+    <div class="form-group mt-3">
+        <form action="/main" method="post" enctype="multipart/form-data">>
+            <div class="form-group">
+                <input type="text" name="text" class="form-control" placeholder="Type your message">
+            </div>
+            <div class="form-group">
+                <input type="text" name="tag" class="form-control" placeholder="Tag">
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="file" name="file" class="form-control" id="customFile">
+                    <label class="custom-file-label" for="customFile"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </form>
+    </div>
 </div>
-<div>Messages</div>
-<div>
-    <form action="/main" method="get">
-        <input type="text" name="filter" value="${filter?ifExists}">
-        <button type="submit">Find</button>
-    </form>
+<div class="card-columns">
+    <#list messages as message>
+    <div class="card my-3" style="width: 18rem;">
+        <div>
+            <#if message.filename??>
+            <img src="/img/${message.filename}" alt="" class="card-img-top">
+            </#if>
+        </div>
+        <div class="m-2">
+            <span>${message.text}</span>
+            <i>${message.tag}</i>
+        </div>
+        <div class="card-footer text-muted">
+            ${message.authorName}
+        </div>
+    </div>
+    <#else>
+    No messages
+    </#list>
 </div>
-<#list messages as message>
-<div>
-    <b>${message.id}</b>
-    <span>${message.text}</span>
-    <i>${message.tag}</i>
-    <strong>${message.authorName}</strong>
-    <div>
-        <#if message.filename??>
-        <img src="/img/${message.filename}" alt="">
-    </#if>
-</div>
-</div>
-<#else>
-No messages
-</#list>
 </@c.page>
