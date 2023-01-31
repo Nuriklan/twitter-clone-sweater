@@ -1,6 +1,9 @@
 package com.sweater.sweater.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "messages")
@@ -18,8 +21,10 @@ public class Message {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Please fill the message field")
+    @Length(max = 2048, message = "Message is too long")
     private String text;
-
+    @Length(max = 255, message = "Message is too long")
     private String tag;
 
     @ManyToOne(fetch = FetchType.EAGER)
