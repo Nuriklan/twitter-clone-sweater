@@ -54,6 +54,10 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 			<version>3.0.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
 		<!-- Secure -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
